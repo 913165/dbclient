@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<head>
+<meta charset="ISO-8859-1">
+<title>Product Manager</title>
+</head>
+<body>
+	<div align="center">
+		<h1>Query Web Client</h1>
+		<br /> <br />
+		<form th:action="@{/dbquery}">
+			<h3>Select DataSource</h3>
+			<select  id="test" name="test">
+				<option value="">Select DB</option>
+				<option th:each="test : ${dblist}" th:value="${test}"
+					th:text="${test}"></option>
+			</select> <br /> <br /> Sql Query : <input type="text" name="keyword"
+				id="keyword" size="50" th:value="${keyword}" required /> &nbsp; <input
+				type="submit" value="Execute" /> &nbsp;
+		</form>
+		<br /> <br />
+
+		<table class="table-responsive-sm" border="1" cellpadding="10">
+			<thead>
+				<tr class="headings">
+					<th th:each="header: ${headers}" class="column-title"
+						th:text="${header}" />
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr class="even pointer" th:each="row: ${rows}" id="tablerow">
+					<td th:each="field: ${row}" th:text="${field.value}" />
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
